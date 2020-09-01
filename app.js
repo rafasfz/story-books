@@ -12,6 +12,7 @@ const myPassport = require('./config/passport')
 const connectDB = require('./config/db')
 const routes = require('./routes')
 const authRoutes = require('./routes/auth')
+const storiesRoutes = require('./routes/stories')
 
 // Load config
 dotenv.config({ path: './config/config.env' })
@@ -22,6 +23,11 @@ myPassport(passport)
 connectDB()
 
 const app = express()
+
+// Body parser
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
+
 
 // Loggin
 if (process.env.NODE_ENV == 'development') {
@@ -50,6 +56,12 @@ app.use(express.static(path.join(__dirname, 'public')))
 // Routes
 app.use('/', routes)
 app.use('/auth', authRoutes)
+app.use('/stories', storiesRoutes)
+
+// Routes error
+app.use((req, res, next) => {
+    return res.status(404).render('error/404')
+})
 
 const PORT = process.env.PORT || 5000
 
