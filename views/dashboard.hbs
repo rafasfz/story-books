@@ -15,12 +15,8 @@
             {{#each stories}}
                 <tr>
                     <td><a href="/stories/{{_id}}">{{title}}</a></td>
-                    <td>{{createdAt}}</td>
-                    <td>
-                        <span class="dash-status">
-                            {{status}}
-                        </span>
-                    </td>
+                    <td>{{formatDate createdAt 'DD/MM/YYYY, HH:mm'}}</td>
+                    <td><span class="dash-status">{{status}}</span></td>
                     <td></td>
                 </tr>
             {{/each}}
