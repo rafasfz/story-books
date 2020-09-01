@@ -1,0 +1,39 @@
+<h3>Edite sua história:</h3>
+<div class="row">
+    <form action="/stories/{{story._id}}" method="POST" class="col s12">
+        <input type="hidden" name="_method" value="PUT">
+        <div class="row">
+            <div class="input-filed">
+                <label for="title">Título</label>
+                <input type="text" id="title" name="title" value="{{story.title}}" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <select name="status" id="status" required>
+                    {{#if story.publicSelect}}
+                        <option value="public" selected>Publica</option>
+                        <option value="private">Privada</option>
+                    {{else}}
+                        <option value="public">Publica</option>
+                        <option value="private" selected>Privada</option>
+                    {{/if}}
+                </select>
+                <label for="status">Status</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <h5>Escreva sua história:</h5>
+                <textarea name="body" id="body" required>{{story.body}}</textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <input type="submit" value="Salvar" class="btn">
+            <a href="/dashboard" class="btn orange">Cancelar</a>
+        </div>
+    </form>
+</div>
