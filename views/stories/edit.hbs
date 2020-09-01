@@ -12,12 +12,12 @@
         <div class="row">
             <div class="input-field">
                 <select name="status" id="status" required>
-                    {{#if story.publicSelect}}
-                        <option value="public" selected>Publica</option>
-                        <option value="private">Privada</option>
-                    {{else}}
+                    {{#if story.privateSelect}}
                         <option value="public">Publica</option>
                         <option value="private" selected>Privada</option>
+                    {{else}}
+                        <option value="public" selected>Publica</option>
+                        <option value="private">Privada</option>
                     {{/if}}
                 </select>
                 <label for="status">Status</label>
