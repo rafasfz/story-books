@@ -17,4 +17,4 @@ npm run dev
 npm start
 ```
 
-You can use the deployed version as your frontend. Access it here [https://storybooksfromrafa.herokuapp.com/](https://storybooksfromrafa.herokuapp.com/).
+You can use the deployed version. Access it here [https://storybooksfromrafa.herokuapp.com/](https://storybooksfromrafa.herokuapp.com/).
