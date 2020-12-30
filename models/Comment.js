@@ -1,14 +1,9 @@
 const mongoose = require('mongoose')
 
-const StorySchema = new mongoose.Schema({
+const CommentSchema = new mongoose.Schema({
     body: {
         type: String,
         required: true
-    },
-    status: {
-        type: String,
-        default: 'public',
-        enum: ['public', 'private']
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -24,4 +19,4 @@ const StorySchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Comment', StorySchema)
+module.exports = mongoose.model('Comment', CommentSchema)

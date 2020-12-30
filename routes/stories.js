@@ -2,6 +2,7 @@ const { Router } = require('express')
 
 const { ensureAuth } = require('../middleware/auth')
 const Story = require('../models/Story')
+const Comment = require('../models/Comment')
 
 const router = Router()
 
@@ -42,7 +43,10 @@ router.get('/:id', ensureAuth, async (req, res) => {
     try {
         let story = await Story.findById(req.params.id)
             .populate('user')
+            .populate('comment')
             .lean()
+
+        let comments = await Comment.find({story}).populate('user').lean();
 
         if(!story) {
             res.render('error/404')
@@ -53,6 +57,7 @@ router.get('/:id', ensureAuth, async (req, res) => {
           } else {
             res.render('stories/show', {
               story,
+              comments
             })
           }
     } catch(err) {
@@ -150,6 +155,27 @@ router.get('/user/:userId', ensureAuth, async (req, res) => {
             stories
         })
     } catch(err) {
+        console.error(err)
+        res.render('error/500')
+    }
+})
+
+// Create a comment
+router.post('/:id/comment', ensureAuth, async (req, res) => {
+    try {
+        const user = req.user.id;
+        const story = req.params.id;
+        const body = req.body.body;
+
+        await Comment.create({
+            user,
+            story,
+            body,
+        });
+
+
+        res.redirect(`/stories/${story}`);
+    } catch (err) {
         console.error(err)
         res.render('error/500')
     }
